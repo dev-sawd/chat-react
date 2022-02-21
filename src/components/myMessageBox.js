@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-const MyMessage = () => {
+const MyMessageBox = () => {
     return (
         <div style={{
             display: "flex",
@@ -40,4 +40,4 @@ const MyMessage = () => {
     )
 }
 
-export default MyMessage
+export default MyMessageBox
