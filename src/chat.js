@@ -6,23 +6,13 @@ import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
 import {DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller} from 'react-scroll'
 import Side from "./components/side";
-import Middle from "./components/middle2";
-
-const MainDiv = styled.div`
-`
-
-const ContentDiv = styled.div`
-  width: 100%;
-  display: flex;
-`
+import Middle from "./components/middle";
 
 export default function Chat() {
     return (
-        <MainDiv>
-            <ContentDiv>
-                <Side />
-                <Middle />
-            </ContentDiv>
-        </MainDiv>
+            <div style={{height:'100vh', display: "flex", flexDirection:"row"}}>
+                <Side style={{flexGrow: 1,backgroundColor: "#3c8eb0", overflowY: 'scroll'}}/>
+                <Middle style={{flexGrow:3, backgroundColor: "#ac3cb0", overflowY: 'scroll'}}/>
+            </div>
     )
 }
