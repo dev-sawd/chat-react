@@ -1,5 +1,6 @@
 import React from "react"
 import {Card} from "@mui/material";
+import ChatManager from "../utils/ChatManager";
 
 const ChatRoomBox = (props) => {
     return (
@@ -9,7 +10,7 @@ const ChatRoomBox = (props) => {
                 flexDirection: "row",
                 margin:10
             }}
-            onClick={()=>alert('o')}>
+            onClick={()=>ChatManager.setTargetUserName(props.userName)}>
                 <div style={{
                     borderRadius: 10,
                     // backgroundColor: "#cea1c4",

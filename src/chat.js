@@ -7,11 +7,13 @@ import ChatRoomBox from "./components/chatRoomBox";
 import SocketManager from "./utils/SocketManager"
 import LoginManager from "./utils/LoginManager";
 import InfoMessageBox from "./components/infoMessageBox";
+import ChatManager from "./utils/ChatManager";
 
 export default function Chat() {
     let socket = null;
 
     useEffect(() => {
+        ChatManager.setTargetUserName(LoginManager.getUserName())
         socket = SocketManager.getSocket()
         socket.on('message', (message) => {
             // setMessages((messages) => [...messages, message])
