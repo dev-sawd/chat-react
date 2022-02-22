@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PCLayout from "./layouts/pcLayout";
 import {Button, FormControl, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
+import io from 'socket.io-client';
+import SocketManager from "./utils/socketManager"
+import LoginManager from "./utils/LoginManager";
 
 export default function Login() {
+    const [userName, setUserName] = useState('')
+
+    useEffect(() => {
+        SocketManager.setSocket(io.connect('http://localhost:4000'))
+    }, [])
+
     return (
         <PCLayout>
             <div
@@ -21,10 +30,14 @@ export default function Login() {
                     <TextField
                         label="ID"
                         sx={{width: '25ch'}}
+                        onChange={(event) => setUserName(event.target.value)}
                     />
-                    <Link key={"main"} to={"/main"} align={'center'} style={{marginTop: "20px", textDecoration: 'none'}}>
-                        <Button variant="contained" style={{width:250, height:50 }}
+                    <Link key={"main"} to={"/main"} align={'center'}
+                          style={{marginTop: "20px", textDecoration: 'none'}}>
+                        <Button variant="contained" style={{width: 250, height: 50}}
                                 onClick={() => {
+                                    LoginManager.setUserName(userName)
+                                    SocketManager.getSocket().emit('login', {userName})
                                 }}>Login</Button>
                     </Link>
                 </FormControl>
