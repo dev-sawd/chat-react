@@ -1,10 +1,11 @@
-import React from "react"
+import React, {useState} from "react"
 import styled from "styled-components"
 import {TextField} from "@mui/material";
+import SocketManager from "../utils/SocketManager";
 
 const MessageInputBox = () => {
+    const [message, setMessage] = useState('')
     return (
-
         <TextField style={{
             position: "fixed",
             alignSelf: "center",
@@ -16,6 +17,18 @@ const MessageInputBox = () => {
                    placeholder="Write your message"
                    multiline
                    variant="filled"
+                   value={message}
+                   onKeyPress={(event) => {
+                       if (event.key === 'Enter') {
+                           console.log('enter')
+                           SocketManager.getSocket().emit('sendMessage', {message})
+                           setMessage('')
+                           event.preventDefault();
+                       }
+                   }}
+                   onChange={(event) => {
+                       setMessage(event.target.value)
+                   }}
         >
         </TextField>
     )

@@ -4,7 +4,7 @@ import {Button, FormControl, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
 import io from 'socket.io-client';
-import SocketManager from "./utils/socketManager"
+import SocketManager from "./utils/SocketManager"
 import LoginManager from "./utils/LoginManager";
 
 export default function Login() {

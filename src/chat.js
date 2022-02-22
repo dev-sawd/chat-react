@@ -4,8 +4,9 @@ import MyMessageBox from "./components/myMessageBox";
 import OtherMessageBox from "./components/otherMessageBox";
 import MessageInputBox from "./components/messageInputBox";
 import ChatRoomBox from "./components/chatRoomBox";
-import SocketManager from "./utils/socketManager"
+import SocketManager from "./utils/SocketManager"
 import LoginManager from "./utils/LoginManager";
+import InfoMessageBox from "./components/infoMessageBox";
 
 export default function Chat() {
     let socket = null;
@@ -40,7 +41,8 @@ export default function Chat() {
             }}>
                 {/*<OtherMessageBox/>*/}
                 {/*<MyMessageBox/>*/}
-                {/*<MessageInputBox/>*/}
+                <InfoMessageBox targetUserName={LoginManager.getUserName()}/>
+                <MessageInputBox/>
             </div>
         </div>
     )
