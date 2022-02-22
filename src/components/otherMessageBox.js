@@ -1,7 +1,6 @@
 import React from "react"
-import styled from "styled-components"
 
-const MyMessage = () => {
+const MyMessage = (props) => {
     return (
         <div style={{
             display: "flex",
@@ -17,7 +16,7 @@ const MyMessage = () => {
                 padding: 10,
                 margin: 10
             }}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                {props.message}
             </div>
             <div style={{
                 flex: 1

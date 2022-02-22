@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {animateScroll as scroll} from 'react-scroll'
 import MyMessageBox from "./components/myMessageBox";
 import OtherMessageBox from "./components/otherMessageBox";
@@ -10,14 +10,14 @@ import InfoMessageBox from "./components/infoMessageBox";
 import ChatManager from "./utils/ChatManager";
 
 export default function Chat() {
+    const [messages, setMessages] = useState([]);
     let socket = null;
 
     useEffect(() => {
         ChatManager.setTargetUserName(LoginManager.getUserName())
         socket = SocketManager.getSocket()
         socket.on('message', (message) => {
-            // setMessages((messages) => [...messages, message])
-            console.log('메세지 송신', message)
+            setMessages((messages) => [...messages, message])
         })
 
         // socket.on('roomData', ({ users }) => {
@@ -29,9 +29,6 @@ export default function Chat() {
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#3c8eb0", overflowY: 'scroll'}}>
                 <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chatting yourself'}/>
-                {/*<ChatRoomBox/>*/}
-                {/*<ChatRoomBox/>*/}
-                {/*<ChatRoomBox/>*/}
             </div>
             <div style={{
                 flex: 3,
@@ -41,9 +38,15 @@ export default function Chat() {
                 overflowY: 'scroll',
                 paddingBottom: '10%',
             }}>
-                {/*<OtherMessageBox/>*/}
-                {/*<MyMessageBox/>*/}
                 <InfoMessageBox targetUserName={LoginManager.getUserName()}/>
+                {
+                    messages.map((message) => {
+                        if (message.targetUserName === LoginManager.getUserName())
+                            return <MyMessageBox key={message.message} message={message.message}/>
+                        else
+                            return <OtherMessageBox key={message.message} message={message.message}/>
+                    })
+                }
                 <MessageInputBox/>
             </div>
         </div>
