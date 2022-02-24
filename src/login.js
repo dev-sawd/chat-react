@@ -41,11 +41,15 @@ export default function Login() {
                                 onClick={() => {
                                     LoginManager.setUserName(userName)
                                     SocketManager.getSocket().emit('login', {userName})
-                                    SocketManager.getSocket().on('returnLoginResponse', function(userNameList) {
-                                        console.log(userNameList)
-                                        ChatManager.setUserNameList(userNameList)
+                                    SocketManager.getSocket().on('returnLoginResponse', function(result, userNameList) {
+                                        console.log(result, userNameList)
+                                        if(result) {
+                                            ChatManager.setUserNameList(userNameList)
 
-                                        navigate("/main")
+                                            navigate("/main")
+                                        } else {
+                                            alert('같은 아이디가 이미 존재합니다')
+                                        }
                                     })
                                 }}>Login</Button>
                     {/*</Link>*/}
