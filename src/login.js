@@ -39,6 +39,8 @@ export default function Login() {
                     {/*      style={{marginTop: "20px", textDecoration: 'none'}}>*/}
                         <Button variant="contained" style={{width: 250, height: 50}}
                                 onClick={() => {
+                                    if(userName === "")
+                                        return
                                     LoginManager.setUserName(userName)
                                     SocketManager.getSocket().emit('login', {userName})
                                     SocketManager.getSocket().on('returnLoginResponse', function(result, userNameList) {
