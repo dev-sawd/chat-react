@@ -2,12 +2,15 @@ import React, {useEffect, useState} from "react";
 import PCLayout from "./layouts/pcLayout";
 import {Button, FormControl, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import io from 'socket.io-client';
 import SocketManager from "./utils/SocketManager"
 import LoginManager from "./utils/LoginManager";
+import ChatManager from "./utils/ChatManager";
 
 export default function Login() {
+    const navigate = useNavigate();
+
     const [userName, setUserName] = useState('')
 
     useEffect(() => {
@@ -32,14 +35,20 @@ export default function Login() {
                         sx={{width: '25ch'}}
                         onChange={(event) => setUserName(event.target.value)}
                     />
-                    <Link key={"main"} to={"/main"} align={'center'}
-                          style={{marginTop: "20px", textDecoration: 'none'}}>
+                    {/*<Link key={"main"} to={"/main"} align={'center'}*/}
+                    {/*      style={{marginTop: "20px", textDecoration: 'none'}}>*/}
                         <Button variant="contained" style={{width: 250, height: 50}}
                                 onClick={() => {
                                     LoginManager.setUserName(userName)
                                     SocketManager.getSocket().emit('login', {userName})
+                                    SocketManager.getSocket().on('returnLoginResponse', function(userNameList) {
+                                        console.log(userNameList)
+                                        ChatManager.setUserNameList(userNameList)
+
+                                        navigate("/main")
+                                    })
                                 }}>Login</Button>
-                    </Link>
+                    {/*</Link>*/}
                 </FormControl>
             </div>
         </PCLayout>

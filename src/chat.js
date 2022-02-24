@@ -11,6 +11,8 @@ import ChatManager from "./utils/ChatManager";
 
 export default function Chat() {
     const [messages, setMessages] = useState([]);
+    const [userNameList, setUserNameList] = useState(ChatManager.getUserNameList());
+    console.log(ChatManager.getUserNameList())
     let socket = null;
 
     useEffect(() => {
@@ -20,15 +22,21 @@ export default function Chat() {
             setMessages((messages) => [...messages, message])
         })
 
-        // socket.on('roomData', ({ users }) => {
-        //     setUsers(users)
-        // })
+        socket.on('loginUser', (userName)  => {
+            setUserNameList([...userNameList, userName])
+        })
     }, [])
 
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#3c8eb0", overflowY: 'scroll'}}>
                 <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chatting yourself'}/>
+                {
+                    userNameList.map((userName) => {
+                        if(userName !== LoginManager.getUserName())
+                            return <ChatRoomBox userName={userName} lastMessage={'Chatting yourself'}/>
+                    })
+                }
             </div>
             <div style={{
                 flex: 3,
