@@ -16,11 +16,13 @@ export default function Chat() {
 
     useEffect(() => {
         ChatManager.setTargetUserName(LoginManager.getUserName())
+
+        socket.on('message', (message) => {
+            setMessages((messages) => [...messages, message])
+        })
+
     }, [])
 
-    socket.on('message', (message) => {
-        setMessages([...messages, message])
-    })
 
     socket.on('loginUser', (userName) => {
         setUserNameList([...userNameList, userName])
