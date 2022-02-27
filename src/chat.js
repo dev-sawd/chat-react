@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {animateScroll as scroll} from 'react-scroll'
-import MyMessageBox from "./components/myMessageBox";
-import OtherMessageBox from "./components/otherMessageBox";
-import MessageInputBox from "./components/messageInputBox";
 import ChatRoomBox from "./components/chatRoomBox";
 import SocketManager from "./utils/SocketManager"
 import LoginManager from "./utils/LoginManager";
-import InfoMessageBox from "./components/infoMessageBox";
 import ChatManager from "./utils/ChatManager";
 import Welcome from "./components/welcome";
+import ChatBox from "./components/chatBox";
 
 export default function Chat() {
     const [messages, setMessages] = useState([]);
@@ -53,6 +50,8 @@ export default function Chat() {
                                                 onClick={() => {
                                                     setTargetUserName(userName)
                                                 }}/>
+                        } else {
+                            return null
                         }
                     })
                 }
@@ -65,7 +64,7 @@ export default function Chat() {
                 paddingBottom: '10%',
             }}>
                 {
-                    targetUserName === null ? <Welcome/> : <InfoMessageBox targetUserName={LoginManager.getUserName()}/>
+                    targetUserName === null ? <Welcome/> : <ChatBox messages={messages} targetUserName={targetUserName}/>
                 }
             </div>
         </div>

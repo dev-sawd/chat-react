@@ -5,7 +5,6 @@ const MyMessageBox = (props) => {
         <div style={{
             display: "flex",
             flexDirection: "row-reverse",
-            backgroundColor: "#ac3cb0",
         }}>
             {/*<div style={{*/}
             {/*    flex: 1*/}
