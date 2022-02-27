@@ -16,25 +16,24 @@ export default function Chat() {
 
     useEffect(() => {
         ChatManager.setTargetUserName(LoginManager.getUserName())
-
-        socket.on('message', (message) => {
-            setMessages((messages) => [...messages, message])
-        })
-
-        socket.on('loginUser', (userName) => {
-            setUserNameList((userNameList) => [...userNameList, userName])
-            console.log(userNameList)
-        })
-
-        // TODO : logoutUser를 리스트에서 삭제(현재 버그로 작동하지 않음)
-        // socket.on('logoutUser', (userName) => {
-        //     const index = userNameList.indexOf(userName);
-        //     console.log(index, userName, userNameList)
-        //     if (index !== -1) {
-        //         setUserNameList((userNameList) => [userNameList.splice(2, 1)])
-        //     }
-        // })
     }, [])
+
+    socket.on('message', (message) => {
+        setMessages([...messages, message])
+    })
+
+    socket.on('loginUser', (userName) => {
+        setUserNameList([...userNameList, userName])
+        console.log('new user = ', userName)
+    })
+
+    socket.on('logoutUser', (userName) => {
+        console.log('userNameList.length', userNameList.length)
+        setUserNameList(userNameList.filter(function(userNameElement) {
+            console.log(userNameElement, userName)
+            return userNameElement !== userName
+        }))
+    })
 
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
@@ -48,6 +47,7 @@ export default function Chat() {
                         if (userName !== LoginManager.getUserName()) {
                             return <ChatRoomBox key={userName} userName={userName} lastMessage={'start chatting'}
                                                 onClick={() => {
+                                                    console.log(userName)
                                                     setTargetUserName(userName)
                                                 }}/>
                         } else {
@@ -64,7 +64,8 @@ export default function Chat() {
                 paddingBottom: '10%',
             }}>
                 {
-                    targetUserName === null ? <Welcome/> : <ChatBox messages={messages} targetUserName={targetUserName}/>
+                    targetUserName === null ? <Welcome/> :
+                        <ChatBox messages={messages} targetUserName={targetUserName}/>
                 }
             </div>
         </div>

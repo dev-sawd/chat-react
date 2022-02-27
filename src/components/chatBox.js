@@ -8,7 +8,7 @@ import LoginManager from "../utils/LoginManager";
 const ChatRoomBox = (props) => {
     return (
         <div>
-            <InfoMessageBox targetUserName={LoginManager.getUserName()}/>
+            <InfoMessageBox targetUserName={props.targetUserName}/>
             {
                 props.messages.map((message) => {
                     if (message.sendUserName === LoginManager.getUserName())
