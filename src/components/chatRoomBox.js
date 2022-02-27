@@ -4,7 +4,7 @@ import ChatManager from "../utils/ChatManager";
 
 const ChatRoomBox = (props) => {
     return (
-        <div>
+        <div onClick={props.onClick}>
             <Card style={{
                 display: "flex",
                 flexDirection: "row",

@@ -8,10 +8,13 @@ import SocketManager from "./utils/SocketManager"
 import LoginManager from "./utils/LoginManager";
 import InfoMessageBox from "./components/infoMessageBox";
 import ChatManager from "./utils/ChatManager";
+import Welcome from "./components/welcome";
 
 export default function Chat() {
     const [messages, setMessages] = useState([]);
     const [userNameList, setUserNameList] = useState(ChatManager.getUserNameList());
+    const [targetUserName, setTargetUserName] = useState(null);
+
     let socket = SocketManager.getSocket();
 
     useEffect(() => {
@@ -39,11 +42,17 @@ export default function Chat() {
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#3c8eb0", overflowY: 'scroll'}}>
-                <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chatting yourself'}/>
+                <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chatting yourself'}
+                             onClick={() => {
+                                 setTargetUserName(LoginManager.getUserName())
+                             }}/>
                 {
                     userNameList.map((userName) => {
                         if (userName !== LoginManager.getUserName()) {
-                            return <ChatRoomBox key={userName} userName={userName} lastMessage={'start chatting'}/>
+                            return <ChatRoomBox key={userName} userName={userName} lastMessage={'start chatting'}
+                                                onClick={() => {
+                                                    setTargetUserName(userName)
+                                                }}/>
                         }
                     })
                 }
@@ -52,20 +61,12 @@ export default function Chat() {
                 flex: 3,
                 display: "flex",
                 flexDirection: "column",
-                backgroundColor: "#ac3cb0",
                 overflowY: 'scroll',
                 paddingBottom: '10%',
             }}>
-                <InfoMessageBox targetUserName={LoginManager.getUserName()}/>
                 {
-                    messages.map((message) => {
-                        if (message.targetUserName === LoginManager.getUserName())
-                            return <MyMessageBox key={message.message} message={message.message}/>
-                        else
-                            return <OtherMessageBox key={message.message} message={message.message}/>
-                    })
+                    targetUserName === null ? <Welcome/> : <InfoMessageBox targetUserName={LoginManager.getUserName()}/>
                 }
-                <MessageInputBox/>
             </div>
         </div>
     )
