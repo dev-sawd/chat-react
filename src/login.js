@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import PCLayout from "./layouts/pcLayout";
-import {Button, FormControl, TextField} from "@mui/material";
+import {Button, Card, FormControl, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router-dom";
 import io from 'socket.io-client';
@@ -19,23 +19,25 @@ export default function Login() {
 
     return (
         <PCLayout>
-            <div
+            <Card
                 style={{
                     position: 'absolute', left: '50%', top: '50%',
-                    transform: 'translate(-50%, -50%)'
+                    transform: 'translate(-50%, -50%)',
+                    padding: 20,
+                    backgroundColor: '#252c3d'
                 }}
             >
-                <Typography style={{paddingTop: "20px", fontWeight: "bold", color: 'white'}}
+                <Typography style={{fontWeight: "bold", color: 'white'}}
                             variant="h4" component="div" gutterBottom>
                     DEVSAWD CHAT
                 </Typography>
-                <FormControl sx={{m: 1, minWidth: 80}}>
+                <FormControl sx={{m: 1, minWidth: 80, display:'flex', flexDirection:"column"}}>
                     <TextField
                         label="ID"
-                        sx={{width: '25ch'}}
+                        sx={{width: '100%', alignContent:'center'}}
                         onChange={(event) => setUserName(event.target.value)}
                     />
-                    <Button variant="contained" style={{width: 250, height: 50}}
+                    <Button variant="contained" style={{marginTop : 10, width: '100%', height: 50, fontSize: '20px', fontWeight: 'bold', color: '#252c3d', backgroundColor: '#9c83be'}}
                             onClick={() => {
                                 if (userName === "")
                                     return
@@ -51,7 +53,7 @@ export default function Login() {
                                 })
                             }}>Login</Button>
                 </FormControl>
-            </div>
+            </Card>
         </PCLayout>
     );
 }
