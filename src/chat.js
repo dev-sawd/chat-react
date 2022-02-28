@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {animateScroll as scroll} from 'react-scroll'
-import MyMessageBox from "./components/myMessageBox";
-import OtherMessageBox from "./components/otherMessageBox";
-import MessageInputBox from "./components/messageInputBox";
 import ChatRoomBox from "./components/chatRoomBox";
 import SocketManager from "./utils/SocketManager"
 import LoginManager from "./utils/LoginManager";
-import InfoMessageBox from "./components/infoMessageBox";
 import ChatManager from "./utils/ChatManager";
+import Welcome from "./components/welcome";
+import ChatBox from "./components/chatBox";
 
 export default function Chat() {
     const [messages, setMessages] = useState([]);
     const [userNameList, setUserNameList] = useState(ChatManager.getUserNameList());
+    const [targetUserName, setTargetUserName] = useState(null);
+
     let socket = SocketManager.getSocket();
 
     useEffect(() => {
@@ -21,29 +21,39 @@ export default function Chat() {
             setMessages((messages) => [...messages, message])
         })
 
-        socket.on('loginUser', (userName) => {
-            setUserNameList((userNameList) => [...userNameList, userName])
-            console.log(userNameList)
-        })
-
-        // TODO : logoutUser를 리스트에서 삭제(현재 버그로 작동하지 않음)
-        // socket.on('logoutUser', (userName) => {
-        //     const index = userNameList.indexOf(userName);
-        //     console.log(index, userName, userNameList)
-        //     if (index !== -1) {
-        //         setUserNameList((userNameList) => [userNameList.splice(2, 1)])
-        //     }
-        // })
     }, [])
+
+
+    socket.on('loginUser', (userName) => {
+        setUserNameList([...userNameList, userName])
+        console.log('new user = ', userName)
+    })
+
+    socket.on('logoutUser', (userName) => {
+        console.log('userNameList.length', userNameList.length)
+        setUserNameList(userNameList.filter(function(userNameElement) {
+            console.log(userNameElement, userName)
+            return userNameElement !== userName
+        }))
+    })
 
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#3c8eb0", overflowY: 'scroll'}}>
-                <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chatting yourself'}/>
+                <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chatting yourself'}
+                             onClick={() => {
+                                 setTargetUserName(LoginManager.getUserName())
+                             }}/>
                 {
                     userNameList.map((userName) => {
                         if (userName !== LoginManager.getUserName()) {
-                            return <ChatRoomBox key={userName} userName={userName} lastMessage={'start chatting'}/>
+                            return <ChatRoomBox key={userName} userName={userName} lastMessage={'start chatting'}
+                                                onClick={() => {
+                                                    console.log(userName)
+                                                    setTargetUserName(userName)
+                                                }}/>
+                        } else {
+                            return null
                         }
                     })
                 }
@@ -52,20 +62,13 @@ export default function Chat() {
                 flex: 3,
                 display: "flex",
                 flexDirection: "column",
-                backgroundColor: "#ac3cb0",
                 overflowY: 'scroll',
                 paddingBottom: '10%',
             }}>
-                <InfoMessageBox targetUserName={LoginManager.getUserName()}/>
                 {
-                    messages.map((message) => {
-                        if (message.targetUserName === LoginManager.getUserName())
-                            return <MyMessageBox key={message.message} message={message.message}/>
-                        else
-                            return <OtherMessageBox key={message.message} message={message.message}/>
-                    })
+                    targetUserName === null ? <Welcome/> :
+                        <ChatBox messages={messages} targetUserName={targetUserName}/>
                 }
-                <MessageInputBox/>
             </div>
         </div>
     )

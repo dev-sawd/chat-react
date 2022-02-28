@@ -3,6 +3,7 @@ import styled from "styled-components"
 import {TextField} from "@mui/material";
 import SocketManager from "../utils/SocketManager";
 import ChatManager from "../utils/ChatManager";
+import LoginManager from "../utils/LoginManager";
 
 const MessageInputBox = () => {
     const [message, setMessage] = useState('')
@@ -21,8 +22,8 @@ const MessageInputBox = () => {
                    value={message}
                    onKeyPress={(event) => {
                        if (event.key === 'Enter') {
-                           // console.log('enter')
-                           SocketManager.getSocket().emit('sendMessage', {targetUserName: ChatManager.getTargetUserName(), message: message})
+                           console.log('enter')
+                           SocketManager.getSocket().emit('sendMessage', {sendUserName: LoginManager.getUserName(), targetUserName: ChatManager.getTargetUserName(), message: message})
                            setMessage('')
                            event.preventDefault();
                        }

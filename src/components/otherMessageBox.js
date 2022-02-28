@@ -5,10 +5,9 @@ const MyMessage = (props) => {
         <div style={{
             display: "flex",
             flexDirection: "row",
-            backgroundColor: "#ac3cb0",
         }}>
             <div style={{
-                flex: 3,
+                // flex: 3,
                 borderStartEndRadius: 20,
                 borderEndStartRadius: 20,
                 borderEndEndRadius: 20,

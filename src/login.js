@@ -35,26 +35,21 @@ export default function Login() {
                         sx={{width: '25ch'}}
                         onChange={(event) => setUserName(event.target.value)}
                     />
-                    {/*<Link key={"main"} to={"/main"} align={'center'}*/}
-                    {/*      style={{marginTop: "20px", textDecoration: 'none'}}>*/}
-                        <Button variant="contained" style={{width: 250, height: 50}}
-                                onClick={() => {
-                                    if(userName === "")
-                                        return
-                                    LoginManager.setUserName(userName)
-                                    SocketManager.getSocket().emit('login', {userName})
-                                    SocketManager.getSocket().on('returnLoginResponse', function(result, userNameList) {
-                                        console.log(result, userNameList)
-                                        if(result) {
-                                            ChatManager.setUserNameList(userNameList)
-
-                                            navigate("/main")
-                                        } else {
-                                            alert('같은 아이디가 이미 존재합니다')
-                                        }
-                                    })
-                                }}>Login</Button>
-                    {/*</Link>*/}
+                    <Button variant="contained" style={{width: 250, height: 50}}
+                            onClick={() => {
+                                if (userName === "")
+                                    return
+                                LoginManager.setUserName(userName)
+                                SocketManager.getSocket().emit('login', {userName})
+                                SocketManager.getSocket().on('returnLoginResponse', function (result, userNameList) {
+                                    if (result) {
+                                        ChatManager.setUserNameList(userNameList)
+                                        navigate("/main")
+                                    } else {
+                                        alert('같은 아이디가 이미 존재합니다')
+                                    }
+                                })
+                            }}>Login</Button>
                 </FormControl>
             </div>
         </PCLayout>
