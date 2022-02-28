@@ -40,14 +40,14 @@ export default function Chat() {
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#3c8eb0", overflowY: 'scroll'}}>
-                <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chatting yourself'}
+                <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chat yourself'}
                              onClick={() => {
                                  setTargetUserName(LoginManager.getUserName())
                              }}/>
                 {
                     userNameList.map((userName) => {
                         if (userName !== LoginManager.getUserName()) {
-                            return <ChatRoomBox key={userName} userName={userName} lastMessage={'start chatting'}
+                            return <ChatRoomBox key={userName} userName={userName} lastMessage={'Start chatting'}
                                                 onClick={() => {
                                                     console.log(userName)
                                                     setTargetUserName(userName)

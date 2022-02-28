@@ -28,16 +28,20 @@ const ChatRoomBox = (props) => {
                         maxHeight: 60,
                         borderRadius: 60,
                         backgroundColor: "darkcyan",
-                        alignSelf: "center",
                         textAlign: "center",
-                        verticalAlign: "middle"
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        fontSize: '30px',
+                        fontWeight: 'bold'
                     }}>
-                        Picture
+                        {props.userName.substring(0, 1)}
                     </div>
                     <div style={{
                         flex: 5, display: "flex",
                         flexDirection: "column",
-                        marginLeft: 10,
+                        marginLeft: 30,
                     }}>
                         <div>{props.userName}</div>
                         <div>{props.lastMessage}</div>
