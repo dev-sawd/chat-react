@@ -13,12 +13,11 @@ const ChatRoomBox = (props) => {
             onClick={()=>ChatManager.setTargetUserName(props.userName)}>
                 <div style={{
                     borderRadius: 10,
-                    // backgroundColor: "#cea1c4",
                     padding: 10,
                     margin: 10,
                     display: "flex",
                     flexDirection: "row",
-                    width: '100%'
+                    width: '100%',
                 }}>
                     <div style={{
                         flex: 1,
@@ -27,7 +26,7 @@ const ChatRoomBox = (props) => {
                         maxWidth: 60,
                         maxHeight: 60,
                         borderRadius: 60,
-                        backgroundColor: "darkcyan",
+                        backgroundColor: "#6d568e",
                         textAlign: "center",
                         display: 'flex',
                         flexDirection: 'column',
@@ -43,8 +42,8 @@ const ChatRoomBox = (props) => {
                         flexDirection: "column",
                         marginLeft: 30,
                     }}>
-                        <div>{props.userName}</div>
-                        <div>{props.lastMessage}</div>
+                        <div style={{fontWeight:'bold', fontSize:'20px'}}>{props.userName}</div>
+                        <div style={{fontSize: '14px'}}>{props.lastMessage}</div>
                     </div>
                 </div>
             </Card>

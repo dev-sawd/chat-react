@@ -39,7 +39,7 @@ export default function Chat() {
 
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
-            <div style={{flex: 1, backgroundColor: "#3c8eb0", overflowY: 'scroll'}}>
+            <div style={{flex: 1, backgroundColor: "#9c83be", overflowY: 'scroll'}}>
                 <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chat yourself'}
                              onClick={() => {
                                  setTargetUserName(LoginManager.getUserName())
