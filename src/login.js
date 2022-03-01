@@ -21,15 +21,17 @@ export default function Login() {
         <PCLayout>
             <Card
                 style={{
+                    display:'flex',
+                    flexDirection:'column',
                     position: 'absolute', left: '50%', top: '50%',
                     transform: 'translate(-50%, -50%)',
                     padding: 20,
                     backgroundColor: '#252c3d'
                 }}
             >
-                <Typography style={{fontWeight: "bold", color: 'white'}}
+                <Typography style={{fontWeight: "bold", color: 'white', alignSelf: 'center'}}
                             variant="h4" component="div" gutterBottom>
-                    DEVSAWD CHAT
+                    SOCKET
                 </Typography>
                 <FormControl sx={{m: 1, minWidth: 80, display:'flex', flexDirection:"column"}}>
                     <TextField
@@ -51,7 +53,7 @@ export default function Login() {
                                         alert('같은 아이디가 이미 존재합니다')
                                     }
                                 })
-                            }}>Login</Button>
+                            }}>Connect</Button>
                 </FormControl>
             </Card>
         </PCLayout>

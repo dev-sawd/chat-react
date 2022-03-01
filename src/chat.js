@@ -37,6 +37,10 @@ export default function Chat() {
         }))
     })
 
+    function closeChatRoom() {
+        setTargetUserName(null)
+    }
+
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#9c83be", overflowY: 'scroll'}}>
@@ -67,7 +71,7 @@ export default function Chat() {
             }}>
                 {
                     targetUserName === null ? <Welcome/> :
-                        <ChatBox messages={messages} targetUserName={targetUserName}/>
+                        <ChatBox messages={messages} targetUserName={targetUserName} closeChatRoom={closeChatRoom}/>
                 }
             </div>
         </div>
