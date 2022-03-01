@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useRef} from "react"
 import MessageInputBox from "./messageInputBox";
 import InfoMessageBox from "./infoMessageBox";
 import MyMessageBox from "./myMessageBox";
@@ -25,11 +25,11 @@ const ChatRoomBox = (props) => {
             />
             <InfoMessageBox targetUserName={props.targetUserName}/>
             {
-                props.messages.map((message) => {
+                props.messages.map((message, index) => {
                     if (message.sendUserName === LoginManager.getUserName())
-                        return <MyMessageBox key={message.message} message={message.message}/>
+                        return <MyMessageBox key={index} message={message.message}/>
                     else
-                        return <OtherMessageBox key={message.message} message={message.message}/>
+                        return <OtherMessageBox key={index} message={message.message}/>
                 })
             }
             <MessageInputBox/>

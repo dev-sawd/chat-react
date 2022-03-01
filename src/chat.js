@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {animateScroll as scroll} from 'react-scroll'
 import ChatRoomBox from "./components/chatRoomBox";
 import SocketManager from "./utils/SocketManager"
@@ -12,6 +12,12 @@ export default function Chat() {
     const [userNameList, setUserNameList] = useState(ChatManager.getUserNameList());
     const [targetUserName, setTargetUserName] = useState(null);
 
+    const messagesEnd = useRef();
+
+    function scrollToBottom() {
+        messagesEnd.current.scrollIntoView();
+    }
+
     let socket = SocketManager.getSocket();
 
     useEffect(() => {
@@ -19,6 +25,7 @@ export default function Chat() {
 
         socket.on('message', (message) => {
             setMessages((messages) => [...messages, message])
+            scrollToBottom();
         })
 
     }, [])
@@ -72,6 +79,8 @@ export default function Chat() {
                     targetUserName === null ? <Welcome/> :
                         <ChatBox messages={messages} targetUserName={targetUserName} closeChatRoom={closeChatRoom}/>
                 }
+                <div style={{marginTop:100}}/>
+                <div ref={messagesEnd}/>
             </div>
         </div>
     )

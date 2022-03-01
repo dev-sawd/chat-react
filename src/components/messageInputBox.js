@@ -5,7 +5,7 @@ import SocketManager from "../utils/SocketManager";
 import ChatManager from "../utils/ChatManager";
 import LoginManager from "../utils/LoginManager";
 
-const MessageInputBox = () => {
+const MessageInputBox = (props) => {
     const [message, setMessage] = useState('')
     return (
         <TextField style={{
