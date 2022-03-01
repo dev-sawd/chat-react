@@ -12,9 +12,12 @@ const Welcome = (props) => {
                 }}
             >
                 <Typography style={{marginLeft: 100, fontWeight: "bold", color: 'white'}}
-                            variant="h4" component="div" gutterBottom>
-                    {LoginManager.getUserName()}님 환영합니다<br/><br/>
-                    왼쪽 로그인 유저 리스트를 선택해 새 대화를 시작하세요.
+                            variant="h3" component="div" gutterBottom>
+                    {LoginManager.getUserName()}님 환영합니다
+                </Typography>
+                <Typography style={{marginLeft: 100, fontWeight: "bold", color: 'white', width:'100%'}}
+                            variant="h5" component="div" gutterBottom>
+                    새 대화를 시작하세요
                 </Typography>
             </div>
         </div>

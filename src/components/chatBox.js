@@ -16,7 +16,8 @@ const ChatRoomBox = (props) => {
                 alignSelf: 'right',
                 color: 'white',
                 width: '40',
-                height: '40'
+                height: '40',
+                opacity:'0.5'
             }}
                onClick={() => {
                    props.closeChatRoom()

@@ -67,7 +67,6 @@ export default function Chat() {
                 display: "flex",
                 flexDirection: "column",
                 overflowY: 'scroll',
-                paddingBottom: '10%',
             }}>
                 {
                     targetUserName === null ? <Welcome/> :
