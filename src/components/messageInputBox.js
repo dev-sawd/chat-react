@@ -9,12 +9,11 @@ const MessageInputBox = () => {
     const [message, setMessage] = useState('')
     return (
         <TextField style={{
-            position: "fixed",
-            alignSelf: "center",
+            position:'fixed',
             bottom: 20,
-            // borderRadius: 10,
             padding: 10,
             width: '70%',
+            alignSelf:'center'
         }}
                    placeholder="Write your message"
                    multiline

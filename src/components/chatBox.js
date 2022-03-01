@@ -7,7 +7,7 @@ import LoginManager from "../utils/LoginManager";
 
 const ChatRoomBox = (props) => {
     return (
-        <div>
+        <div style={{display:'flex', flexDirection:'column'}}>
             <InfoMessageBox targetUserName={props.targetUserName}/>
             {
                 props.messages.map((message) => {
