@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from "react";
-import {animateScroll as scroll} from 'react-scroll'
 import ChatRoomBox from "./components/chatRoomBox";
 import SocketManager from "./utils/SocketManager"
 import LoginManager from "./utils/LoginManager";
@@ -77,7 +76,10 @@ export default function Chat() {
             }}>
                 {
                     targetUserName === null ? <Welcome/> :
-                        <ChatBox messages={messages} targetUserName={targetUserName} closeChatRoom={closeChatRoom}/>
+                        <ChatBox messages={messages.filter(function(message){
+                            return (message.sendUserName === LoginManager.getUserName() && message.targetUserName === targetUserName)
+                            || (message.sendUserName === targetUserName && message.targetUserName === LoginManager.getUserName())
+                        })} targetUserName={targetUserName} closeChatRoom={closeChatRoom}/>
                 }
                 <div style={{marginTop:100}}/>
                 <div ref={messagesEnd}/>
