@@ -43,7 +43,10 @@ const ChatRoomBox = (props) => {
                         marginLeft: 30,
                     }}>
                         <div style={{fontWeight:'bold', fontSize:'20px'}}>{props.userName}</div>
-                        <div style={{fontSize: '14px'}}>{props.lastMessage}</div>
+                        {props.lastMessage !== undefined
+                            ? <div style={{fontSize: '14px'}}>{props.lastMessage.message}</div>
+                            : <div style={{fontSize: '14px'}}>새 대화를 시작하세요.</div>
+                        }
                     </div>
                 </div>
             </Card>

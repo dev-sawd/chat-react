@@ -29,6 +29,10 @@ export default function Chat() {
 
     }, [])
 
+    // TODO : lastmessage 버그 수정 후 삭제
+    useEffect(() => {
+        console.log(messages)
+    }, [messages])
 
     socket.on('loginUser', (userName) => {
         setUserNameList([...userNameList, userName])
@@ -50,16 +54,21 @@ export default function Chat() {
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#9c83be", overflowY: 'scroll'}}>
-                <ChatRoomBox userName={LoginManager.getUserName()} lastMessage={'Chat yourself'}
+                {/*TODO:lastmessage 버그 수정*/}
+                <ChatRoomBox userName={LoginManager.getUserName()}
+                             lastMessage={messages.filter(message => (message.sendUserName === LoginManager.getUserName() && message.targetUserName === LoginManager.getUserName()))[messages.length - 1]}
                              onClick={() => {
+                                 console.log(messages)
                                  setTargetUserName(LoginManager.getUserName())
                              }}/>
                 {
                     userNameList.map((userName) => {
                         if (userName !== LoginManager.getUserName()) {
-                            return <ChatRoomBox key={userName} userName={userName} lastMessage={'Start chatting'}
+                            return <ChatRoomBox key={userName} userName={userName}
+                                                lastMessage={messages.filter(message => ((message.sendUserName === LoginManager.getUserName() && message.targetUserName === userName)
+                                                    || (message.sendUserName === userName && message.targetUserName === LoginManager.getUserName())))[messages.length - 1]}
                                                 onClick={() => {
-                                                    console.log(userName)
+                                                    console.log(messages)
                                                     setTargetUserName(userName)
                                                 }}/>
                         } else {
