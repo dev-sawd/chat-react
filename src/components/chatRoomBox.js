@@ -8,9 +8,9 @@ const ChatRoomBox = (props) => {
             <Card style={{
                 display: "flex",
                 flexDirection: "row",
-                margin:10
+                margin: 10
             }}
-            onClick={()=>ChatManager.setTargetUserName(props.userName)}>
+                  onClick={() => ChatManager.setTargetUserName(props.userName)}>
                 <div style={{
                     borderRadius: 10,
                     padding: 10,
@@ -42,9 +42,9 @@ const ChatRoomBox = (props) => {
                         flexDirection: "column",
                         marginLeft: 30,
                     }}>
-                        <div style={{fontWeight:'bold', fontSize:'20px'}}>{props.userName}</div>
-                        {props.lastMessage !== undefined
-                            ? <div style={{fontSize: '14px'}}>{props.lastMessage.message}</div>
+                        <div style={{fontWeight: 'bold', fontSize: '20px'}}>{props.userName}</div>
+                        {props.lastMessage !== undefined && props.lastMessage.length > 0
+                            ? <div style={{fontSize: '14px'}}>{props.lastMessage[props.lastMessage.length - 1].message}</div>
                             : <div style={{fontSize: '14px'}}>새 대화를 시작하세요.</div>
                         }
                     </div>
