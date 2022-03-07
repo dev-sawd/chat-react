@@ -6,13 +6,7 @@ const MyMessageBox = (props) => {
             display: "flex",
             flexDirection: "row-reverse",
         }}>
-            {/*<div style={{*/}
-            {/*    flex: 1*/}
-            {/*}}>*/}
-
-            {/*</div>*/}
             <div style={{
-                // flex: 3,
                 borderStartStartRadius: 20,
                 borderStartEndRadius: 20,
                 borderEndStartRadius: 20,
