@@ -4,9 +4,13 @@ const MyMessageBox = (props) => {
     return (
         <div style={{
             display: "flex",
-            flexDirection: "row-reverse",
+            flexDirection: "row",
         }}>
             <div style={{
+                flex: 1,
+            }}/>
+            <div style={{
+                flex: 3,
                 borderStartStartRadius: 20,
                 borderStartEndRadius: 20,
                 borderEndStartRadius: 20,

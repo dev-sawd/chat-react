@@ -47,7 +47,8 @@ const ChatRoomBox = (props) => {
                     }}>
                         <div style={{fontWeight: 'bold', fontSize: '20px'}}>{props.userName}</div>
                         {props.lastMessage !== undefined && props.lastMessage.length > 0
-                            ? <div style={{fontSize: '14px'}}>{props.lastMessage[props.lastMessage.length - 1].message}</div>
+                            ? <div
+                                style={{fontSize: '14px'}}>{props.lastMessage[props.lastMessage.length - 1].message.substring(0, 40)}...</div>
                             : <div style={{fontSize: '14px'}}>새 대화를 시작하세요.</div>
                         }
                     </div>

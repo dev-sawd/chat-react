@@ -7,7 +7,7 @@ const MyMessage = (props) => {
             flexDirection: "row",
         }}>
             <div style={{
-                // flex: 3,
+                flex: 3,
                 borderStartEndRadius: 20,
                 borderEndStartRadius: 20,
                 borderEndEndRadius: 20,
