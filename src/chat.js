@@ -3,17 +3,19 @@ import ChatRoomBox from "./components/chatRoomBox";
 import SocketManager from "./utils/SocketManager"
 import Welcome from "./components/welcome";
 import ChatBox from "./components/chatBox";
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {addMessage, addUserName, deleteUserName} from "./features/login/chatSlice";
 
 export default function Chat() {
+    const dispatch = useDispatch()
 
-    const [messages, setMessages] = useState([]);
-    const [userNameList, setUserNameList] = useState(useSelector((state) => state.chat.userNameList));
     const [targetUserName, setTargetUserName] = useState(null);
 
     const messagesEnd = useRef();
 
     const loginUser = useSelector((state) => state.loginUser.user)
+    const messageList = useSelector((state) => state.chat.messageList)
+    const userNameList = useSelector((state) => state.chat.userNameList)
 
     function scrollToBottom() {
         messagesEnd.current.scrollIntoView();
@@ -23,17 +25,15 @@ export default function Chat() {
 
     useEffect(() => {
         socket.on('message', (message) => {
-            setMessages((messages) => [...messages, message])
+            dispatch(addMessage(message))
         })
 
         socket.on('loginUser', (userName) => {
-            setUserNameList((userNameList) => [...userNameList, userName])
+            dispatch(addUserName(userName))
         })
 
         socket.on('logoutUser', (userName) => {
-            setUserNameList((userNameList) => userNameList.filter(function(userNameElement) {
-                return userNameElement !== userName
-            }))
+            dispatch(deleteUserName(userName))
         })
     }, [])
 
@@ -45,7 +45,7 @@ export default function Chat() {
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#9c83be", overflowY: 'scroll'}}>
                 <ChatRoomBox userName={loginUser}
-                             lastMessage={messages.filter(message => (message.sendUserName === loginUser && message.targetUserName === loginUser))}
+                             lastMessage={messageList.filter(message => (message.sendUserName === loginUser && message.targetUserName === loginUser))}
                              onClick={() => {
                                  setTargetUserName(loginUser)
                              }}/>
@@ -53,7 +53,7 @@ export default function Chat() {
                     userNameList.map((userName) => {
                         if (userName !== loginUser) {
                             return <ChatRoomBox key={userName} userName={userName}
-                                                lastMessage={messages.filter(message => ((message.sendUserName === loginUser && message.targetUserName === userName)
+                                                lastMessage={messageList.filter(message => ((message.sendUserName === loginUser && message.targetUserName === userName)
                                                     || (message.sendUserName === userName && message.targetUserName === loginUser)))}
                                                 onClick={() => {
                                                     setTargetUserName(userName)
@@ -73,7 +73,7 @@ export default function Chat() {
                 {
                     targetUserName === null
                         ? <Welcome/>
-                        : <ChatBox messages={messages.filter(function(message){
+                        : <ChatBox messages={messageList.filter(function(message){
                             return (message.sendUserName === loginUser && message.targetUserName === targetUserName)
                             || (message.sendUserName === targetUserName && message.targetUserName === loginUser)
                         })} targetUserName={targetUserName} closeChatRoom={closeChatRoom}
