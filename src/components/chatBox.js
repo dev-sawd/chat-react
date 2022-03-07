@@ -1,4 +1,4 @@
-import React, {useRef} from "react"
+import React, {useEffect, useRef} from "react"
 import MessageInputBox from "./messageInputBox";
 import InfoMessageBox from "./infoMessageBox";
 import MyMessageBox from "./myMessageBox";
@@ -7,6 +7,9 @@ import LoginManager from "../utils/LoginManager";
 import CloseIcon from '@mui/icons-material/Cancel';
 
 const ChatRoomBox = (props) => {
+    useEffect(() => {
+        props.scrollToBottom()
+    })
     return (
         <div style={{display: 'flex', flexDirection: 'column'}}>
             <CloseIcon style={{

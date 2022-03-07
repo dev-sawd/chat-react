@@ -24,7 +24,6 @@ export default function Chat() {
 
         socket.on('message', (message) => {
             setMessages((messages) => [...messages, message])
-            scrollToBottom();
         })
 
     }, [])
@@ -52,7 +51,6 @@ export default function Chat() {
                 <ChatRoomBox userName={LoginManager.getUserName()}
                              lastMessage={messages.filter(message => (message.sendUserName === LoginManager.getUserName() && message.targetUserName === LoginManager.getUserName()))}
                              onClick={() => {
-                                 console.log(messages)
                                  setTargetUserName(LoginManager.getUserName())
                              }}/>
                 {
@@ -77,11 +75,13 @@ export default function Chat() {
                 overflowY: 'scroll',
             }}>
                 {
-                    targetUserName === null ? <Welcome/> :
-                        <ChatBox messages={messages.filter(function(message){
+                    targetUserName === null
+                        ? <Welcome/>
+                        : <ChatBox messages={messages.filter(function(message){
                             return (message.sendUserName === LoginManager.getUserName() && message.targetUserName === targetUserName)
                             || (message.sendUserName === targetUserName && message.targetUserName === LoginManager.getUserName())
-                        })} targetUserName={targetUserName} closeChatRoom={closeChatRoom}/>
+                        })} targetUserName={targetUserName} closeChatRoom={closeChatRoom}
+                                 scrollToBottom={scrollToBottom} messagesEnd={messagesEnd}/>
                 }
                 <div style={{marginTop:100}}/>
                 <div ref={messagesEnd}/>
