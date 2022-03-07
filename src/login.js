@@ -5,14 +5,12 @@ import Typography from "@mui/material/Typography"
 import {useNavigate} from "react-router-dom"
 import io from 'socket.io-client'
 import SocketManager from "./utils/SocketManager"
-import LoginManager from "./utils/LoginManager"
 import ChatManager from "./utils/ChatManager"
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setLoginUser } from "./features/login/loginSlice";
 
 export default function Login() {
     const navigate = useNavigate();
-    const loginUser = useSelector((state) => state.loginUser.user)
     const dispatch = useDispatch()
 
     const [userName, setUserName] = useState('')
@@ -47,7 +45,6 @@ export default function Login() {
                             onClick={() => {
                                 if (userName === "")
                                     return
-                                LoginManager.setUserName(userName)
                                 dispatch(setLoginUser(userName))
                                 SocketManager.getSocket().emit('login', {userName})
                                 SocketManager.getSocket().on('returnLoginResponse', function (result, userNameList) {

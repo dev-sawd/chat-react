@@ -1,12 +1,14 @@
-import React, {useEffect, useRef} from "react"
+import React, {useEffect} from "react"
 import MessageInputBox from "./messageInputBox";
 import InfoMessageBox from "./infoMessageBox";
 import MyMessageBox from "./myMessageBox";
 import OtherMessageBox from "./otherMessageBox";
-import LoginManager from "../utils/LoginManager";
 import CloseIcon from '@mui/icons-material/Cancel';
+import {useSelector} from "react-redux";
 
 const ChatRoomBox = (props) => {
+    const loginUser = useSelector((state) => state.loginUser.user)
+
     useEffect(() => {
         props.scrollToBottom()
     })
@@ -28,7 +30,7 @@ const ChatRoomBox = (props) => {
             <InfoMessageBox targetUserName={props.targetUserName}/>
             {
                 props.messages.map((message, index) => {
-                    if (message.sendUserName === LoginManager.getUserName())
+                    if (message.sendUserName === loginUser)
                         return <MyMessageBox key={index} message={message.message}/>
                     else
                         return <OtherMessageBox key={index} message={message.message}/>

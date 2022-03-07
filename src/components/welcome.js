@@ -1,8 +1,10 @@
 import React from "react"
 import Typography from "@mui/material/Typography";
-import LoginManager from "../utils/LoginManager";
+import {useSelector} from "react-redux";
 
 const Welcome = (props) => {
+    const loginUser = useSelector((state) => state.loginUser.user)
+
     return (
         <div style={props.style}>
             <div
@@ -13,7 +15,7 @@ const Welcome = (props) => {
             >
                 <Typography style={{marginLeft: 100, fontWeight: "bold", color: 'white'}}
                             variant="h3" component="div" gutterBottom>
-                    {LoginManager.getUserName()}님 환영합니다
+                    {loginUser}님 환영합니다
                 </Typography>
                 <Typography style={{marginLeft: 100, fontWeight: "bold", color: 'white', width:'100%'}}
                             variant="h5" component="div" gutterBottom>
