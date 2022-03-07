@@ -1,6 +1,6 @@
 import React from "react"
 import {Card} from "@mui/material";
-import {setTargetUserName} from "../features/login/chatSlice";
+import {setTargetUserName} from "../../features/chatSlice";
 import {useDispatch} from "react-redux";
 
 const ChatRoomBox = (props) => {

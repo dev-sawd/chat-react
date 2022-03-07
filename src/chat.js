@@ -1,21 +1,19 @@
-import React, {useEffect, useRef, useState} from "react";
-import ChatRoomBox from "./components/chatRoomBox";
+import React, {useEffect, useRef} from "react";
 import SocketManager from "./utils/SocketManager"
-import Welcome from "./components/welcome";
-import ChatBox from "./components/chatBox";
+import WelcomeSide from "./components/welcomeSide";
+import ChatBox from "./components/chatSide";
 import {useDispatch, useSelector} from 'react-redux'
-import {addMessage, addUserName, deleteUserName} from "./features/login/chatSlice";
+import {addMessage, addUserName, deleteUserName, setTargetUserName} from "./features/chatSlice";
+import ChatRoomSide from "./components/chatRoomSide";
 
 export default function Chat() {
     const dispatch = useDispatch()
 
-    const [targetUserName, setTargetUserName] = useState(null);
-
-    const messagesEnd = useRef();
-
     const loginUser = useSelector((state) => state.loginUser.user)
     const messageList = useSelector((state) => state.chat.messageList)
-    const userNameList = useSelector((state) => state.chat.userNameList)
+    const targetUserName = useSelector((state) => state.chat.targetUserName)
+
+    const messagesEnd = useRef();
 
     function scrollToBottom() {
         messagesEnd.current.scrollIntoView();
@@ -38,31 +36,13 @@ export default function Chat() {
     }, [])
 
     function closeChatRoom() {
-        setTargetUserName(null)
+        dispatch(setTargetUserName(null))
     }
 
     return (
         <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
             <div style={{flex: 1, backgroundColor: "#9c83be", overflowY: 'scroll'}}>
-                <ChatRoomBox userName={loginUser}
-                             lastMessage={messageList.filter(message => (message.sendUserName === loginUser && message.targetUserName === loginUser))}
-                             onClick={() => {
-                                 setTargetUserName(loginUser)
-                             }}/>
-                {
-                    userNameList.map((userName) => {
-                        if (userName !== loginUser) {
-                            return <ChatRoomBox key={userName} userName={userName}
-                                                lastMessage={messageList.filter(message => ((message.sendUserName === loginUser && message.targetUserName === userName)
-                                                    || (message.sendUserName === userName && message.targetUserName === loginUser)))}
-                                                onClick={() => {
-                                                    setTargetUserName(userName)
-                                                }}/>
-                        } else {
-                            return null
-                        }
-                    })
-                }
+                <ChatRoomSide/>
             </div>
             <div style={{
                 flex: 3,
@@ -72,7 +52,7 @@ export default function Chat() {
             }}>
                 {
                     targetUserName === null
-                        ? <Welcome/>
+                        ? <WelcomeSide/>
                         : <ChatBox messages={messageList.filter(function(message){
                             return (message.sendUserName === loginUser && message.targetUserName === targetUserName)
                             || (message.sendUserName === targetUserName && message.targetUserName === loginUser)

@@ -6,8 +6,8 @@ import {useNavigate} from "react-router-dom"
 import io from 'socket.io-client'
 import SocketManager from "./utils/SocketManager"
 import { useDispatch } from 'react-redux'
-import { setLoginUser } from "./features/login/loginSlice";
-import {setUserNameList} from "./features/login/chatSlice";
+import { setLoginUser } from "./features/loginSlice";
+import {setUserNameList} from "./features/chatSlice";
 
 export default function Login() {
     const navigate = useNavigate();

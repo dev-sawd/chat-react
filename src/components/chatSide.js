@@ -1,8 +1,8 @@
 import React, {useEffect} from "react"
-import MessageInputBox from "./messageInputBox";
-import InfoMessageBox from "./infoMessageBox";
-import MyMessageBox from "./myMessageBox";
-import OtherMessageBox from "./otherMessageBox";
+import MessageInputBox from "./atom/messageInputBox";
+import InfoMessageBox from "./atom/infoMessageBox";
+import MyMessageBox from "./atom/myMessageBox";
+import OtherMessageBox from "./atom/otherMessageBox";
 import CloseIcon from '@mui/icons-material/Cancel';
 import {useSelector} from "react-redux";
 
@@ -12,6 +12,7 @@ const ChatRoomBox = (props) => {
     useEffect(() => {
         props.scrollToBottom()
     })
+
     return (
         <div style={{display: 'flex', flexDirection: 'column'}}>
             <CloseIcon style={{

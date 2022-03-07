@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import {TextField} from "@mui/material";
-import SocketManager from "../utils/SocketManager";
+import SocketManager from "../../utils/SocketManager";
 import {useSelector} from "react-redux";
 
 const MessageInputBox = () => {

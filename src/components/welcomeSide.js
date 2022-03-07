@@ -2,7 +2,7 @@ import React from "react"
 import Typography from "@mui/material/Typography";
 import {useSelector} from "react-redux";
 
-const Welcome = (props) => {
+const WelcomeSide = (props) => {
     const loginUser = useSelector((state) => state.loginUser.user)
 
     return (
@@ -26,4 +26,4 @@ const Welcome = (props) => {
     )
 }
 
-export default Welcome
+export default WelcomeSide
