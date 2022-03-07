@@ -26,20 +26,16 @@ export default function Chat() {
             setMessages((messages) => [...messages, message])
         })
 
+        socket.on('loginUser', (userName) => {
+            setUserNameList((userNameList) => [...userNameList, userName])
+        })
+
+        socket.on('logoutUser', (userName) => {
+            setUserNameList((userNameList) => userNameList.filter(function(userNameElement) {
+                return userNameElement !== userName
+            }))
+        })
     }, [])
-
-    socket.on('loginUser', (userName) => {
-        setUserNameList([...userNameList, userName])
-        console.log('new user = ', userName)
-    })
-
-    socket.on('logoutUser', (userName) => {
-        console.log('userNameList.length', userNameList.length)
-        setUserNameList(userNameList.filter(function(userNameElement) {
-            console.log(userNameElement, userName)
-            return userNameElement !== userName
-        }))
-    })
 
     function closeChatRoom() {
         setTargetUserName(null)
