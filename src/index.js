@@ -9,7 +9,8 @@ import {
 import NotFound from "./notfound";
 import Login from "./login";
 import Chat from "./chat";
-
+import store from './app/store'
+import {Provider} from 'react-redux'
 
 if (process.env.NODE_ENV === 'production') {
     console.log = function no_console() {
@@ -20,29 +21,6 @@ if (process.env.NODE_ENV === 'production') {
     };
 }
 
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-
-// import Media from 'react-media'
-
-// const firebaseConfig = {
-//     apiKey: "AIzaSyBp9btqhqy5tQamF14oMgtMqu_xxZFDILs",
-//     authDomain: "loain-66b27.firebaseapp.com",
-//     projectId: "loain-66b27",
-//     storageBucket: "loain-66b27.appspot.com",
-//     messagingSenderId: "272818676679",
-//     appId: "1:272818676679:web:cceb1f7ea5957655056fe2",
-//     measurementId: "G-67RCP7HXHH"
-// };
-
-// const MEDIA_QUERIES = {
-//     pc : '(min-width: 1025px)',
-//     mobile: '(max-width: 1024px)',
-// };
-
-// const app = initializeApp(firebaseConfig);
-// getAnalytics(app);
-
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -51,20 +29,22 @@ const darkTheme = createTheme({
 
 
 render(
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" element={
-                <ThemeProvider theme={darkTheme}>
-                    <Login/>
-                </ThemeProvider>}>
-            </Route>
-            <Route path="/main" element={
-                <ThemeProvider theme={darkTheme}>
-                    <Chat/>
-                </ThemeProvider>}>
-            </Route>
-            <Route path="*" element={<NotFound />} />
-        </Routes>
-    </BrowserRouter>,
+    <Provider store={store}>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={
+                    <ThemeProvider theme={darkTheme}>
+                        <Login/>
+                    </ThemeProvider>}>
+                </Route>
+                <Route path="/main" element={
+                    <ThemeProvider theme={darkTheme}>
+                        <Chat/>
+                    </ThemeProvider>}>
+                </Route>
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
+        </BrowserRouter>
+    </Provider>,
     document.getElementById("root")
 );
