@@ -31,7 +31,6 @@ const ChatRoomBox = (props) => {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        alignItems: 'center',
                         fontSize: '30px',
                         fontWeight: 'bold'
                     }}>

@@ -16,7 +16,6 @@ const ChatRoomBox = (props) => {
                 position: 'fixed',
                 top: 20,
                 right: 50,
-                alignSelf: 'right',
                 color: 'white',
                 width: '40',
                 height: '40',

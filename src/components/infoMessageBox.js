@@ -12,7 +12,8 @@ const InfoMessageBox = (props) => {
                 backgroundColor: "#b4ce76",
                 padding: 10,
                 margin: 10,
-                alignSelf: 'center'
+                alignSelf: 'center',
+                fontWeight: 'bold'
             }}>
                 {props.targetUserName}님과 채팅이 시작되었습니다
             </div>
