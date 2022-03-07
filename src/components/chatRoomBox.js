@@ -1,8 +1,11 @@
 import React from "react"
 import {Card} from "@mui/material";
-import ChatManager from "../utils/ChatManager";
+import {setTargetUserName} from "../features/login/chatSlice";
+import {useDispatch} from "react-redux";
 
 const ChatRoomBox = (props) => {
+    const dispatch = useDispatch()
+
     return (
         <div onClick={props.onClick}>
             <Card style={{
@@ -10,7 +13,8 @@ const ChatRoomBox = (props) => {
                 flexDirection: "row",
                 margin: 10
             }}
-                  onClick={() => ChatManager.setTargetUserName(props.userName)}>
+                  onClick={() =>
+                      dispatch(setTargetUserName(props.userName))}>
                 <div style={{
                     borderRadius: 10,
                     padding: 10,

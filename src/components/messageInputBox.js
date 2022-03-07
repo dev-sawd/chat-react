@@ -1,13 +1,13 @@
 import React, {useState} from "react"
 import {TextField} from "@mui/material";
 import SocketManager from "../utils/SocketManager";
-import ChatManager from "../utils/ChatManager";
 import {useSelector} from "react-redux";
 
 const MessageInputBox = () => {
     const [message, setMessage] = useState('')
 
     const loginUser = useSelector((state) => state.loginUser.user)
+    const targetUserName = useSelector((state) => state.chat.targetUserName)
 
     return (
         <TextField style={{
@@ -23,7 +23,7 @@ const MessageInputBox = () => {
                    value={message}
                    onKeyPress={(event) => {
                        if (event.key === 'Enter') {
-                           SocketManager.getSocket().emit('sendMessage', {sendUserName: loginUser, targetUserName: ChatManager.getTargetUserName(), message: message})
+                           SocketManager.getSocket().emit('sendMessage', {sendUserName: loginUser, targetUserName: targetUserName, message: message})
                            setMessage('')
                            event.preventDefault();
                        }

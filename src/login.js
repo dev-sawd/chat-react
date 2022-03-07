@@ -5,9 +5,9 @@ import Typography from "@mui/material/Typography"
 import {useNavigate} from "react-router-dom"
 import io from 'socket.io-client'
 import SocketManager from "./utils/SocketManager"
-import ChatManager from "./utils/ChatManager"
 import { useDispatch } from 'react-redux'
 import { setLoginUser } from "./features/login/loginSlice";
+import {setUserNameList} from "./features/login/chatSlice";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -49,7 +49,7 @@ export default function Login() {
                                 SocketManager.getSocket().emit('login', {userName})
                                 SocketManager.getSocket().on('returnLoginResponse', function (result, userNameList) {
                                     if (result) {
-                                        ChatManager.setUserNameList(userNameList)
+                                        dispatch(setUserNameList(userNameList))
                                         navigate("/main")
                                     } else {
                                         alert('같은 아이디가 이미 존재합니다')

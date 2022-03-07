@@ -1,14 +1,14 @@
 import React, {useEffect, useRef, useState} from "react";
 import ChatRoomBox from "./components/chatRoomBox";
 import SocketManager from "./utils/SocketManager"
-import ChatManager from "./utils/ChatManager";
 import Welcome from "./components/welcome";
 import ChatBox from "./components/chatBox";
 import {useSelector} from 'react-redux'
 
 export default function Chat() {
+
     const [messages, setMessages] = useState([]);
-    const [userNameList, setUserNameList] = useState(ChatManager.getUserNameList());
+    const [userNameList, setUserNameList] = useState(useSelector((state) => state.chat.userNameList));
     const [targetUserName, setTargetUserName] = useState(null);
 
     const messagesEnd = useRef();
@@ -22,8 +22,6 @@ export default function Chat() {
     let socket = SocketManager.getSocket();
 
     useEffect(() => {
-        ChatManager.setTargetUserName(loginUser)
-
         socket.on('message', (message) => {
             setMessages((messages) => [...messages, message])
         })
