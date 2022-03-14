@@ -32,14 +32,14 @@ const ChatRoomBox = (props) => {
         {
           props.messages.map((message, index) => {
             if (message.sendUserName === loginUser)
-                        return <MyMessageBox key={index} message={message.message}/>
-                    else
-                        return <OtherMessageBox key={index} message={message.message}/>
-                })
-            }
-            <MessageInputBox/>
-        </div>
-    )
-}
+              return <MyMessageBox key={index} message={message.message}/>;
+            else
+              return <OtherMessageBox key={index} message={message.message}/>;
+          })
+        }
+        <MessageInputBox/>
+      </div>
+  );
+};
 
-export default ChatRoomBox
+export default ChatRoomBox;

@@ -9,38 +9,37 @@ import store from './app/store';
 import {Provider} from 'react-redux';
 
 if (process.env.NODE_ENV === 'production') {
-    console.log = function no_console() {
-    };
-    console.warn = function no_console() {
-    };
-    console.warn = function() {
-    };
+  console.log = function no_console() {
+  };
+  console.warn = function no_console() {
+  };
+  console.warn = function() {
+  };
 }
 
 const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
+  palette: {
+    mode: 'dark',
+  },
 });
-
 
 render(
     <Provider store={store}>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={
-                    <ThemeProvider theme={darkTheme}>
-                        <Login/>
-                    </ThemeProvider>}>
-                </Route>
-                <Route path="/main" element={
-                    <ThemeProvider theme={darkTheme}>
-                        <Chat/>
-                    </ThemeProvider>}>
-                </Route>
-                <Route path="*" element={<NotFound/>}/>
-            </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={
+            <ThemeProvider theme={darkTheme}>
+              <Login/>
+            </ThemeProvider>}>
+          </Route>
+          <Route path="/main" element={
+            <ThemeProvider theme={darkTheme}>
+              <Chat/>
+            </ThemeProvider>}>
+          </Route>
+          <Route path="*" element={<NotFound/>}/>
+        </Routes>
+      </BrowserRouter>
     </Provider>,
     document.getElementById('root'),
 );

@@ -40,4 +40,4 @@ const MessageInputBox = () => {
   );
 };
 
-export default MessageInputBox
+export default MessageInputBox;

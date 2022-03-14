@@ -40,7 +40,7 @@ const ChatRoomSide = () => {
           })
         }
       </div>
-    )
-}
+  );
+};
 
-export default ChatRoomSide
+export default ChatRoomSide;

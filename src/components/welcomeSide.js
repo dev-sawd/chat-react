@@ -32,4 +32,4 @@ const WelcomeSide = (props) => {
   );
 };
 
-export default WelcomeSide
+export default WelcomeSide;
