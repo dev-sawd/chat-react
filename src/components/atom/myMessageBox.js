@@ -1,10 +1,10 @@
-import React from "react"
+import React from 'react';
 
 const MyMessageBox = (props) => {
     return (
         <div style={{
-            display: "flex",
-            flexDirection: "row",
+            display: 'flex',
+            flexDirection: 'row',
         }}>
             <div style={{
                 flex: 1,
@@ -14,9 +14,9 @@ const MyMessageBox = (props) => {
                 borderStartStartRadius: 20,
                 borderStartEndRadius: 20,
                 borderEndStartRadius: 20,
-                backgroundColor: "#50b8c2",
+                backgroundColor: '#50b8c2',
                 padding: 10,
-                margin: 10
+                margin: 10,
             }}>
                 {props.message}
             </div>

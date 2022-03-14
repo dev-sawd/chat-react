@@ -1,17 +1,22 @@
-import React, {useEffect, useRef} from "react";
-import SocketManager from "./utils/SocketManager"
-import WelcomeSide from "./components/welcomeSide";
-import ChatBox from "./components/chatSide";
-import {useDispatch, useSelector} from 'react-redux'
-import {addMessage, addUserName, deleteUserName, setTargetUserName} from "./features/chatSlice";
-import ChatRoomSide from "./components/chatRoomSide";
+import React, {useEffect, useRef} from 'react';
+import SocketManager from './utils/SocketManager';
+import WelcomeSide from './components/welcomeSide';
+import ChatBox from './components/chatSide';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+    addMessage,
+    addUserName,
+    deleteUserName,
+    setTargetUserName,
+} from './features/chatSlice';
+import ChatRoomSide from './components/chatRoomSide';
 
 export default function Chat() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const loginUser = useSelector((state) => state.loginUser.user)
-    const messageList = useSelector((state) => state.chat.messageList)
-    const targetUserName = useSelector((state) => state.chat.targetUserName)
+    const loginUser = useSelector((state) => state.loginUser.user);
+    const messageList = useSelector((state) => state.chat.messageList);
+    const targetUserName = useSelector((state) => state.chat.targetUserName);
 
     const messagesEnd = useRef();
 
@@ -40,14 +45,18 @@ export default function Chat() {
     }
 
     return (
-        <div style={{height: '100vh', display: "flex", flexDirection: "row"}}>
-            <div style={{flex: 1, backgroundColor: "#9c83be", overflowY: 'scroll'}}>
+        <div style={{height: '100vh', display: 'flex', flexDirection: 'row'}}>
+            <div style={{
+                flex: 1,
+                backgroundColor: '#9c83be',
+                overflowY: 'scroll',
+            }}>
                 <ChatRoomSide/>
             </div>
             <div style={{
                 flex: 3,
-                display: "flex",
-                flexDirection: "column",
+                display: 'flex',
+                flexDirection: 'column',
                 overflowY: 'scroll',
             }}>
                 {

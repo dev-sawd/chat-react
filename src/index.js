@@ -1,23 +1,19 @@
-import React from "react";
-import {render} from "react-dom";
+import React from 'react';
+import {render} from 'react-dom';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {
-    BrowserRouter,
-    Routes,
-    Route
-} from "react-router-dom";
-import NotFound from "./notfound";
-import Login from "./login";
-import Chat from "./chat";
-import store from './app/store'
-import {Provider} from 'react-redux'
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import NotFound from './notfound';
+import Login from './login';
+import Chat from './chat';
+import store from './app/store';
+import {Provider} from 'react-redux';
 
 if (process.env.NODE_ENV === 'production') {
     console.log = function no_console() {
     };
     console.warn = function no_console() {
     };
-    console.warn = function () {
+    console.warn = function() {
     };
 }
 
@@ -46,5 +42,5 @@ render(
             </Routes>
         </BrowserRouter>
     </Provider>,
-    document.getElementById("root")
+    document.getElementById('root'),
 );

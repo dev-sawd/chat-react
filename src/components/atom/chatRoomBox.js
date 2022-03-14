@@ -1,17 +1,17 @@
-import React from "react"
-import {Card} from "@mui/material";
-import {setTargetUserName} from "../../features/chatSlice";
-import {useDispatch} from "react-redux";
+import React from 'react';
+import {Card} from '@mui/material';
+import {setTargetUserName} from '../../features/chatSlice';
+import {useDispatch} from 'react-redux';
 
 const ChatRoomBox = (props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     return (
         <div onClick={props.onClick}>
             <Card style={{
-                display: "flex",
-                flexDirection: "row",
-                margin: 10
+                display: 'flex',
+                flexDirection: 'row',
+                margin: 10,
             }}
                   onClick={() =>
                       dispatch(setTargetUserName(props.userName))}>
@@ -19,8 +19,8 @@ const ChatRoomBox = (props) => {
                     borderRadius: 10,
                     padding: 10,
                     margin: 10,
-                    display: "flex",
-                    flexDirection: "row",
+                    display: 'flex',
+                    flexDirection: 'row',
                     width: '100%',
                 }}>
                     <div style={{
@@ -30,19 +30,19 @@ const ChatRoomBox = (props) => {
                         maxWidth: 60,
                         maxHeight: 60,
                         borderRadius: 60,
-                        backgroundColor: "#6d568e",
-                        textAlign: "center",
+                        backgroundColor: '#6d568e',
+                        textAlign: 'center',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         fontSize: '30px',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
                     }}>
                         {props.userName.substring(0, 1)}
                     </div>
                     <div style={{
-                        flex: 5, display: "flex",
-                        flexDirection: "column",
+                        flex: 5, display: 'flex',
+                        flexDirection: 'column',
                         marginLeft: 30,
                     }}>
                         <div style={{fontWeight: 'bold', fontSize: '20px'}}>{props.userName}</div>

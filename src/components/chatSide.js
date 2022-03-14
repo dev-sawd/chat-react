@@ -1,37 +1,37 @@
-import React, {useEffect} from "react"
-import MessageInputBox from "./atom/messageInputBox";
-import InfoMessageBox from "./atom/infoMessageBox";
-import MyMessageBox from "./atom/myMessageBox";
-import OtherMessageBox from "./atom/otherMessageBox";
+import React, {useEffect} from 'react';
+import MessageInputBox from './atom/messageInputBox';
+import InfoMessageBox from './atom/infoMessageBox';
+import MyMessageBox from './atom/myMessageBox';
+import OtherMessageBox from './atom/otherMessageBox';
 import CloseIcon from '@mui/icons-material/Cancel';
-import {useSelector} from "react-redux";
+import {useSelector} from 'react-redux';
 
 const ChatRoomBox = (props) => {
-    const loginUser = useSelector((state) => state.loginUser.user)
+  const loginUser = useSelector((state) => state.loginUser.user);
 
-    useEffect(() => {
-        props.scrollToBottom()
-    })
+  useEffect(() => {
+    props.scrollToBottom();
+  });
 
-    return (
-        <div style={{display: 'flex', flexDirection: 'column'}}>
-            <CloseIcon style={{
-                position: 'fixed',
-                top: 20,
-                right: 50,
-                color: 'white',
-                width: '40',
-                height: '40',
-                opacity:'0.5'
-            }}
-               onClick={() => {
-                   props.closeChatRoom()
-               }}
-            />
-            <InfoMessageBox targetUserName={props.targetUserName}/>
-            {
-                props.messages.map((message, index) => {
-                    if (message.sendUserName === loginUser)
+  return (
+      <div style={{display: 'flex', flexDirection: 'column'}}>
+        <CloseIcon style={{
+          position: 'fixed',
+          top: 20,
+          right: 50,
+          color: 'white',
+          width: '40',
+          height: '40',
+          opacity: '0.5',
+        }}
+                   onClick={() => {
+                     props.closeChatRoom();
+                   }}
+        />
+        <InfoMessageBox targetUserName={props.targetUserName}/>
+        {
+          props.messages.map((message, index) => {
+            if (message.sendUserName === loginUser)
                         return <MyMessageBox key={index} message={message.message}/>
                     else
                         return <OtherMessageBox key={index} message={message.message}/>
